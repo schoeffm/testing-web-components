@@ -1,5 +1,5 @@
 // noinspection ES6UnusedImports
-import ChildComponent from './first.component.js';
+import ChildComponent from './child.component.js';
 
 export default class ParentComponent extends HTMLElement {
 
@@ -8,15 +8,25 @@ export default class ParentComponent extends HTMLElement {
         this.root = this.attachShadow({mode: 'open'});
     }
 
-    async connectedCallback() {
+    connectedCallback() {
         customElements
             .whenDefined('sfm-parent')
-            .then(_ => this.render());
+            .then(() => this.render())
+            .then(() => this.root.querySelector('sfm-child'))
+            .then((node) => this._loadData(node));
     }
 
     render() {
-        console.log("Was called");
         this.root.innerHTML = `<sfm-child></sfm-child>`;
+    }
+
+    _loadData(node) {
+        fetch('/sfm/api/customers')
+            .then(res => res.json())
+            .then(({firstname, lastname})=> {
+                node.firstname = firstname;
+                node.lastname = lastname;
+            });
     }
 }
 customElements.define('sfm-parent', ParentComponent);
