@@ -1,0 +1,21 @@
+{
+  "name": "testing-wc",
+  "version": "1.0.0",
+  "description": "A simple demo for testing web-components",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start",
+    "test:debug": "karma start --single-run=false"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@open-wc/testing": "2.2.2",
+    "@open-wc/testing-karma": "3.1.6",
+    "deepmerge": "4.0.0",
+    "karma": "4.2.0",
+    "lit-html": "1.1.1",
+    "mocha": "6.2.0"
+  },
+  "dependencies": {}
+}
